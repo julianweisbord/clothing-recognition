@@ -3,7 +3,8 @@ Created on July 10th, 2018
 Author: Julian Weisbord
 Description: Create and train a CNN to classify articles of clothing.
 '''
-
+import os
+os.environ['KMP_DUPLICATE_LIB_OK']= 'True'
 import tensorflow as tf
 
 TRAIN_DATA = "./train"

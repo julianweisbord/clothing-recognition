@@ -3,13 +3,15 @@ Created on July 10th, 2018
 Author: Julian Weisbord
 Description: Reload the clothing classifier for inference.
 '''
+import os
+os.environ['KMP_DUPLICATE_LIB_OK']= 'True'
 import numpy as np
 import tensorflow as tf
 from keras.models import Sequential, model_from_json
 from keras.preprocessing.image import ImageDataGenerator
 import h5py
 
-TEST_DATA = "./test_inference/"
+TEST_DATA = "./test_data/"
 IMG_WIDTH = 300
 IMG_HEIGHT = 300
 BATCH_SIZE = 10
@@ -27,11 +29,11 @@ def predict():
                         classes=CLASSES,
                         batch_size=BATCH_SIZE)
 
-    json_file = open("models/model2.json", 'r')
+    json_file = open("models/model.json", 'r')
     loaded_model_json = json_file.read()
     json_file.close()
     loaded_model = model_from_json(loaded_model_json)
-    loaded_model.load_weights("models/basic_cnn2.h5")
+    loaded_model.load_weights("models/basic_cnn.h5")
 
     # prediction = loaded_model.predict_generator(test_generator, steps=1)
     loaded_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
